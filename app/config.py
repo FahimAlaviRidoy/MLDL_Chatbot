@@ -5,9 +5,13 @@ load_dotenv()
 
 
 class Settings:
-    MODEL_NAME = os.getenv(
-        "MODEL_NAME",
-        "mistral-7b-instruct-v0.1.Q4_0.gguf"
+    HF_MODEL = os.getenv(
+        "HF_MODEL",
+        "microsoft/Phi-3-mini-4k-instruct"
+    )
+
+    HF_TOKEN = os.getenv(
+        "HF_TOKEN"
     )
 
     EMBEDDING_MODEL = os.getenv(
@@ -32,7 +36,10 @@ class Settings:
     )
 
     MEMORY_WINDOW = int(
-        os.getenv("MEMORY_WINDOW", 5)
+        os.getenv(
+            "MEMORY_WINDOW",
+            5
+        )
     )
 
     MAX_CONTEXT_CHUNKS = int(

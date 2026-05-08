@@ -120,23 +120,12 @@ def stats(session_id: str):
     )
 
     return {
-        "documents_uploaded":
-        kb_stats["documents"],
-
-        "chunks_indexed":
-        kb_stats["chunks"],
-
-        "conversation_messages":
-        memory_count,
-
-        "embedding_model":
-        settings.EMBEDDING_MODEL,
-
-        "llm_model":
-        settings.MODEL_NAME,
-
-        "session_id":
-        session_id[:8]
+        "documents_uploaded": kb_stats["documents"],
+        "chunks_indexed": kb_stats["chunks"],
+        "conversation_messages": memory_count,
+        "embedding_model": settings.EMBEDDING_MODEL,
+        "llm_model": settings.HF_MODEL,
+        "session_id": session_id[:8]
     }
 
 

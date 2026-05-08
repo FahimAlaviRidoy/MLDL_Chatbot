@@ -1,33 +1,50 @@
-from gpt4all import GPT4All
+from huggingface_hub import (
+    InferenceClient
+)
 from app.config import settings
 
 
 class LocalLLM:
     def __init__(self):
         print(
-            "Loading GPT4All model..."
+            "Connecting to Hugging Face..."
         )
 
-        self.model = GPT4All(
-            settings.MODEL_NAME
+        self.client = InferenceClient(
+            model=settings.HF_MODEL,
+            token=settings.HF_TOKEN
         )
 
         print(
-            "GPT4All loaded."
+            "Connected."
         )
 
     def generate(
         self,
         prompt
     ):
-        with self.model.chat_session():
-            response = self.model.generate(
-                prompt,
-                max_tokens=512,
-                temp=0.2
-            )
+        messages = [
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ]
 
-        return response.strip()
+        output = (
+            self.client
+            .chat_completion(
+                messages=messages,
+                max_tokens=512,
+                temperature=0.2
+            )
+        )
+
+        return (
+            output
+            .choices[0]
+            .message.content
+            .strip()
+        )
 
 
 llm = LocalLLM()

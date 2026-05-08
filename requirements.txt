@@ -20,6 +20,6 @@ beautifulsoup4==4.12.3
 pydantic==2.9.2
 python-dotenv==1.0.1
 
-gpt4all>=2.8.2
+huggingface_hub>=0.25.1
 
 numpy>=1.26.0
